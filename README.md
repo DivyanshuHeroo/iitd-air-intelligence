@@ -10,7 +10,7 @@ IITD Air Intelligence is an end-to-end machine learning project that predicts hy
 
 ![Dashboard Overview](reports/screenshots/dashboard_overview.png)
 
-## 1. Live Demo
+## 2. Live Demo
 Live website: Coming soon after Streamlit Cloud deployment.
 
 To run locally:
@@ -19,13 +19,6 @@ streamlit run app/streamlit_app.py
 ```
 *Note: This app is deployed with Streamlit Community Cloud from the GitHub repository. The cloud app uses a committed best model artifact so visitors can use predictions without running training manually.*
 
-## 3. Recruiter / Interview Material
-- [Recruiter Summary](RECRUITER_SUMMARY.md)
-- [Resume Bullets](RESUME.md)
-- [Interview Q&A](INTERVIEW_QA.md)
-- [Demo Video Script](DEMO_VIDEO_SCRIPT.md)
-- [Project One-Pager](PROJECT_ONE_PAGER.md)
-- [LinkedIn Post Draft](LINKEDIN_POST.md)
 
 ## 3. Why this project?
 Air pollution is highly localized. While city-wide Air Quality Indices (AQI) give a broad picture, they fail to provide actionable intelligence for individual neighborhoods or commute routes. This project bridges that gap by modeling PM2.5 at specific coordinates based on meteorology and historical lag data, converting raw ML predictions into practical exposure advice.
@@ -135,12 +128,4 @@ iitd-air-intelligence/
 - Integrate live traffic data streams (e.g., Google Maps API).
 - Implement recurrent neural networks (LSTMs) for long-horizon multi-step forecasting.
 
-## 18. Resume Bullets
-- Built an end-to-end ML system for hyperlocal PM2.5 prediction in Delhi-NCR using an IITD-linked air pollution dataset.
-- Engineered temporal, spatial, meteorological, lag, and rolling-window features while avoiding time-series leakage.
-- Benchmarked persistence, linear, tree-based, and boosting models using time-based validation.
-- Deployed the best model through a Streamlit dashboard and FastAPI inference service.
-- Added an IIT Delhi / South Delhi route exposure advisor to convert predictions into actionable decisions.
 
-## 19. Interview Pitch
-“I built IITD Air Intelligence, an end-to-end machine learning system for hyperlocal PM2.5 prediction in Delhi-NCR using an IITD-linked air pollution dataset. I engineered spatial, temporal, meteorological, lag, and rolling-window features, used time-based validation to avoid leakage, benchmarked multiple models against a persistence baseline, and deployed the best model through a Streamlit dashboard and FastAPI service. I also added a route exposure advisor around IIT Delhi and South Delhi, so the project goes beyond prediction and turns ML output into a practical decision-support tool.”
