@@ -5,10 +5,10 @@ This document contains everything you need to successfully launch the IITD Air I
 ## 1. LinkedIn Post Options
 *See `LINKEDIN_POST.md` for the full text of all 3 options.*
 
-**Recommendation**: Use **Option 1 (Main Post)**. It strikes the perfect balance of technical rigor (mentioning next-hour prediction, expanding-window features, and baseline comparisons) and product thinking (the route advisor). It avoids claiming "high accuracy" and focuses instead on a robust engineering pipeline.
+**Recommendation**: Use **Option 1 (Main Post)**. It strikes the perfect balance of technical rigor (mentioning next-hour prediction, expanding-window features, and baseline comparisons) and product thinking (the route advisor). It correctly frames the 59.3% exact category accuracy, the 95.6% adjacent accuracy, and the 84.9% severity accuracy, completely avoiding the inflated binary accuracy problem.
 
 ## 2. Links to Add
-**Live Demo:** *(Add your Streamlit Cloud URL here after you click deploy)*
+**Live Demo:** <add live demo link>
 **GitHub:** https://github.com/DivyanshuHeroo/iitd-air-intelligence
 
 ## 3. Visual Assets
@@ -18,21 +18,24 @@ All 6 slides have been generated automatically!
 1. `linkedin_assets/carousel/slide_01_title.png`
 2. `linkedin_assets/carousel/slide_02_problem.png`
 3. `linkedin_assets/carousel/slide_03_pipeline.png`
-4. `linkedin_assets/carousel/slide_04_performance.png`
+4. `linkedin_assets/carousel/slide_04_classification_results.png`
 5. `linkedin_assets/carousel/slide_05_dashboard.png`
 6. `linkedin_assets/carousel/slide_06_route_advisor.png`
 *(For alt text and captions, see `linkedin_assets/carousel/CAPTIONS.md`)*
 
 ### 📊 Performance Assets
-- `linkedin_assets/performance/model_comparison.png`
-- `linkedin_assets/performance/actual_vs_predicted.png`
-- `linkedin_assets/performance/error_analysis_summary.png`
+If you prefer not to use a carousel, you can post these individual performance charts from `reports/figures/`:
+- `reports/figures/category_model_comparison.png`
+- `reports/figures/category_confusion_matrix_6class.png`
+- `reports/figures/category_confusion_matrix_3class.png`
 
 ### 📸 Website Screenshots (Manual Capture Required)
 Please follow the instructions in `linkedin_assets/screenshots/SCREENSHOT_GUIDE.md` to capture:
 - `website_home.png`
 - `iitd_prediction.png`
 - `route_exposure_advisor.png`
+- `classification_results.png`
+- `model_performance.png`
 - `fastapi_docs.png`
 
 ## 4. Manual Posting Checklist

@@ -3,7 +3,7 @@
 1. **LinkedIn post created:** Yes (See `LINKEDIN_POST.md` for 3 versions)
 2. **Carousel images created:** Yes (Generated computationally via PIL to `linkedin_assets/carousel/`)
 3. **Website screenshots captured:** No (Because UI rendering requires a manual browser context, a `SCREENSHOT_GUIDE.md` was provided instead).
-4. **Performance screenshots captured:** Yes (Copied from `reports/figures/` to `linkedin_assets/performance/`).
+4. **Performance visuals created:** Yes (Copied from `reports/figures/` or generated locally).
 5. **FastAPI docs screenshot captured:** No (Requires manual capture via `SCREENSHOT_GUIDE.md`).
 6. **Live demo link found:** No (Streamlit Community Cloud deployment requires the user to manually click 'Deploy' with their GitHub authentication).
 7. **GitHub link found:** Yes (https://github.com/DivyanshuHeroo/iitd-air-intelligence)
