@@ -251,7 +251,24 @@ elif nav_selection == "Model Performance":
         if class_path.exists():
             df_class = pd.read_csv(class_path)
             st.write("### Secondary Task: PM2.5 Category Classification")
+            
+            summary_path = config.METRICS_DIR / "best_classification_summary.md"
+            if summary_path.exists():
+                with open(summary_path, "r") as f:
+                    st.markdown(f.read())
+            
             st.dataframe(df_class.style.format(precision=3), use_container_width=True)
+            
+            st.write("### Classification Confusion Matrices")
+            col1, col2 = st.columns(2)
+            with col1:
+                cm_6_path = config.FIGURE_DIR / "category_confusion_matrix_6class.png"
+                if cm_6_path.exists():
+                    st.image(str(cm_6_path), caption="6-Class Confusion Matrix")
+            with col2:
+                cm_3_path = config.FIGURE_DIR / "category_confusion_matrix_3class.png"
+                if cm_3_path.exists():
+                    st.image(str(cm_3_path), caption="3-Class Confusion Matrix")
     else:
         st.warning("Model results not found. Run training script first.")
 

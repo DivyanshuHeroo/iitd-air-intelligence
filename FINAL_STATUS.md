@@ -16,8 +16,12 @@ The project is completely polished, robust, and **successfully pushed to GitHub*
 - **Model RMSE**: 70.56 (19.6% improvement)
 - **Baseline MAE**: 63.28
 - **Model MAE**: 52.90 (16.4% improvement)
-- **Classification Accuracy**: 61.9% (on PM2.5 categories)
-(Evaluated inside `reports/metrics/model_results.csv`)
+
+**Classification Outcome (Next-Hour Prediction)**
+- **Exact 6-Class**: ~59% (Not 85%, but adjacent-class correctness is ~95%)
+- **3-Class Severity (Low/Medium/High)**: ~85%
+- **Binary Unsafe-Air**: ~99% (Driven heavily by class imbalance in Delhi winter)
+(Evaluated inside `reports/metrics/category_classification_results.csv`)
 
 ## 4. Dashboard Status
 **Ready.** The Streamlit dashboard (`app/streamlit_app.py`) is styled professionally, robustly handles missing data files without crashing, and displays the Route Exposure Advisor, live prediction inputs, and mapped model results effectively. Default values center on IIT Delhi.

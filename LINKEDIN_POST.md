@@ -13,7 +13,7 @@ I set up a challenging task: predicting *next-hour* PM2.5 levels. To solve this,
 ✅ **Advanced feature engineering:** temporal, spatial, meteorological, lag, and expanding-window features
 ✅ **Time-based cross-validation** to strictly avoid temporal leakage
 ✅ **Persistence baseline comparison** (My best Ridge model improved RMSE by 19.6% over baseline)
-✅ **Secondary Classification Task:** Predicting PM2.5 categories (Good, Satisfactory, Moderate, etc.) with ~62% accuracy
+✅ **Secondary Classification Task:** Predicting PM2.5 categories (Good, Satisfactory, Moderate, etc.) with ~62% performance
 ✅ **Streamlit dashboard** for interactive predictions
 ✅ **FastAPI backend** for inference
 ✅ **Route exposure advisor** comparing paths around IIT Delhi and South Delhi
