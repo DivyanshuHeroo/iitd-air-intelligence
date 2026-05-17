@@ -11,6 +11,7 @@ venv/
 data/raw/
 data/processed/
 models/*.pkl
+!models/best_pm25_model.pkl
 !data/sample/
 !reports/metrics/model_results.csv
 !reports/figures/
