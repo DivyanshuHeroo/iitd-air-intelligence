@@ -1,0 +1,2 @@
+Model,Accuracy,Macro_F1,Weighted_F1
+RandomForestClassifier,0.6189830024282246,0.31858205180739557,0.5693163723504853

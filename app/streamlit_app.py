@@ -232,14 +232,26 @@ elif nav_selection == "Model Performance":
     st.header("Model Performance")
     if config.MODEL_RESULTS_PATH.exists():
         df_metrics = pd.read_csv(config.MODEL_RESULTS_PATH)
-        st.dataframe(df_metrics, use_container_width=True)
+        st.dataframe(df_metrics.style.format(precision=2), use_container_width=True)
         
-        best_model = df_metrics.iloc[0]["Model"]
-        st.success(f"Best Model: {best_model}")
+        ml_models = df_metrics[df_metrics["Model"] != "Persistence_Baseline"]
+        if not ml_models.empty:
+            best_model = ml_models.iloc[0]
+            st.success(f"**Best Model**: {best_model['Model']}")
+            
+            imp_rmse = best_model.get("RMSE_improvement_percent", 0)
+            imp_mae = best_model.get("MAE_improvement_percent", 0)
+            st.info(f"The model improves over a simple persistence baseline by **{imp_rmse:.1f}%** in RMSE and **{imp_mae:.1f}%** in MAE.")
         
         fig_path = config.FIGURE_DIR / "model_comparison.png"
         if fig_path.exists():
             st.image(str(fig_path), caption="Model Comparison (MAE)")
+            
+        class_path = config.METRICS_DIR / "category_classification_results.csv"
+        if class_path.exists():
+            df_class = pd.read_csv(class_path)
+            st.write("### Secondary Task: PM2.5 Category Classification")
+            st.dataframe(df_class.style.format(precision=3), use_container_width=True)
     else:
         st.warning("Model results not found. Run training script first.")
 
@@ -268,6 +280,6 @@ elif nav_selection == "Limitations":
     st.markdown("""
     - **Educational/Portfolio Use**: This model is for educational and portfolio demonstration purposes only. It is not an official health advisory.
     - **Historical Data**: The historical dataset may not reflect current real-time pollution anomalies.
-    - **Dependency on Past Values**: PM2.5 is highly auto-regressive. Without knowing the recent past values (lag), the model's accuracy drops.
+    - **Pollution Spikes**: The model attempts the challenging task of predicting next-hour PM2.5 levels. While the model captures meaningful signal and improves over a baseline, it still struggles with sudden pollution spikes, which are difficult to predict from historical and meteorological features alone.
     - **External Factors**: Does not explicitly account for sudden events like traffic jams or stubble burning.
     """)

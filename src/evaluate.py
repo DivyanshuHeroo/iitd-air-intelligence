@@ -38,13 +38,16 @@ def plot_hourly_pattern(df: pd.DataFrame):
         plt.savefig(FIGURES_DIR / "hourly_pm25_pattern.png")
         plt.close()
 
-def plot_actual_vs_predicted(df: pd.DataFrame, best_model_name: str):
+def plot_actual_vs_predicted(df: pd.DataFrame, best_model_name: str, target_col="pm2_5_target_next_1h"):
     pred_col = f"{best_model_name}_pred"
+    if target_col not in df.columns:
+        target_col = "pm2_5"
+        
     if pred_col in df.columns:
         plt.figure(figsize=(10, 10))
-        plt.scatter(df["pm2_5"], df[pred_col], alpha=0.5)
+        plt.scatter(df[target_col], df[pred_col], alpha=0.5)
         
-        max_val = max(df["pm2_5"].max(), df[pred_col].max())
+        max_val = max(df[target_col].max(), df[pred_col].max())
         plt.plot([0, max_val], [0, max_val], 'r--') # diagonal
         
         plt.title(f"Actual vs Predicted PM2.5 ({best_model_name})")
@@ -53,10 +56,13 @@ def plot_actual_vs_predicted(df: pd.DataFrame, best_model_name: str):
         plt.savefig(FIGURES_DIR / "actual_vs_predicted.png")
         plt.close()
 
-def plot_residual_distribution(df: pd.DataFrame, best_model_name: str):
+def plot_residual_distribution(df: pd.DataFrame, best_model_name: str, target_col="pm2_5_target_next_1h"):
     pred_col = f"{best_model_name}_pred"
+    if target_col not in df.columns:
+        target_col = "pm2_5"
+        
     if pred_col in df.columns:
-        residuals = df["pm2_5"] - df[pred_col]
+        residuals = df[target_col] - df[pred_col]
         plt.figure(figsize=(10, 6))
         sns.histplot(residuals, bins=50, kde=True)
         plt.title(f"Residual Distribution ({best_model_name})")
@@ -85,16 +91,19 @@ def plot_feature_importance(model, feature_names):
         plt.savefig(FIGURES_DIR / "feature_importance.png")
         plt.close()
 
-def generate_error_analysis(test_df: pd.DataFrame, best_model_name: str):
+def generate_error_analysis(test_df: pd.DataFrame, best_model_name: str, target_col="pm2_5_target_next_1h"):
     pred_col = f"{best_model_name}_pred"
+    if target_col not in test_df.columns:
+        target_col = "pm2_5"
+        
     if pred_col in test_df.columns:
         error_df = pd.DataFrame()
         error_df["dateTime"] = test_df.get("dateTime")
         error_df["lat"] = test_df.get("lat")
         error_df["long"] = test_df.get("long")
-        error_df["actual_pm2_5"] = test_df["pm2_5"]
+        error_df["actual_pm2_5"] = test_df[target_col]
         error_df["predicted_pm2_5"] = test_df[pred_col]
-        error_df["absolute_error"] = np.abs(test_df["pm2_5"] - test_df[pred_col])
+        error_df["absolute_error"] = np.abs(test_df[target_col] - test_df[pred_col])
         error_df["hour"] = test_df.get("hour")
         error_df["dayofweek"] = test_df.get("dayofweek")
         

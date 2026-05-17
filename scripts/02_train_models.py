@@ -24,15 +24,21 @@ def main():
     feature_cols = [
         "hour", "day", "dayofweek", "month", "is_weekend",
         "hour_sin", "hour_cos", "dayofweek_sin", "dayofweek_cos",
-        "lat", "long", "distance_from_iitd_km",
-        "pressure", "temperature", "humidity"
+        "month_sin", "month_cos",
+        "lat", "long", "lat_rounded", "long_rounded", "distance_from_iitd_km",
+        "pressure", "temperature", "humidity", "temp_humidity_interaction",
+        "location_expanding_pm25_mean", "location_hour_expanding_pm25_mean", "hour_expanding_pm25_mean"
     ]
     
     # Add lag and rolling features if they exist
-    for col in ["pm2_5_lag_1", "pm2_5_lag_3", "pm2_5_lag_6",
-                "pm10_lag_1", "pm10_lag_3", "pm10_lag_6",
-                "pm2_5_rolling_3", "pm2_5_rolling_6",
-                "pm10_rolling_3", "pm10_rolling_6"]:
+    for col in [
+        "pm2_5_lag_1", "pm2_5_lag_2", "pm2_5_lag_3", "pm2_5_lag_6", "pm2_5_lag_12", "pm2_5_lag_24",
+        "pm10_lag_1", "pm10_lag_2", "pm10_lag_3", "pm10_lag_6", "pm10_lag_12", "pm10_lag_24",
+        "pm2_5_rolling_mean_3", "pm2_5_rolling_mean_6", "pm2_5_rolling_mean_12", "pm2_5_rolling_mean_24",
+        "pm2_5_rolling_std_3", "pm2_5_rolling_std_6", "pm2_5_rolling_std_12", "pm2_5_rolling_std_24",
+        "pm10_rolling_mean_3", "pm10_rolling_mean_6", "pm10_rolling_mean_12", "pm10_rolling_mean_24",
+        "pm10_rolling_std_3", "pm10_rolling_std_6", "pm10_rolling_std_12", "pm10_rolling_std_24"
+    ]:
         if col in df.columns:
             feature_cols.append(col)
             
@@ -46,13 +52,21 @@ def main():
         json.dump(feature_cols, f)
         
     print("Training models...")
-    metrics_df, trained_models, test_df = train_and_evaluate(df, config.TARGET_COL, feature_cols)
+    # New target: Predict next-hour PM2.5
+    target_col = "pm2_5_target_next_1h" if "pm2_5_target_next_1h" in df.columns else config.TARGET_COL
+    
+    metrics_df, class_metrics, trained_models, test_df = train_and_evaluate(df, target_col, feature_cols)
     
     print("\nModel Leaderboard:")
     print(metrics_df.to_string(index=False))
     
     # Save metrics
     metrics_df.to_csv(config.METRICS_DIR / "model_results.csv", index=False)
+    
+    if not class_metrics.empty:
+        print("\nClassification Results:")
+        print(class_metrics.to_string(index=False))
+        class_metrics.to_csv(config.METRICS_DIR / "category_classification_results.csv", index=False)
     
     # Save best ML model (exclude persistence)
     ml_models_df = metrics_df[metrics_df["Model"] != "Persistence_Baseline"]

@@ -11,10 +11,12 @@ The project is completely polished, robust, and **successfully pushed to GitHub*
 - `pytest tests/`
 
 ## 3. Best Model and Metrics
-**Ridge Regression** is the best model on the strict 80/20 time-based split:
-- **MAE**: 40.75
-- **RMSE**: 58.29
-- **R²**: 0.498
+**Ridge Regression** is the best model for predicting next-hour PM2.5, significantly beating the persistence baseline:
+- **Baseline RMSE**: 87.72
+- **Model RMSE**: 70.56 (19.6% improvement)
+- **Baseline MAE**: 63.28
+- **Model MAE**: 52.90 (16.4% improvement)
+- **Classification Accuracy**: 61.9% (on PM2.5 categories)
 (Evaluated inside `reports/metrics/model_results.csv`)
 
 ## 4. Dashboard Status
@@ -33,7 +35,7 @@ The project is completely polished, robust, and **successfully pushed to GitHub*
 **Passed.** `pytest tests/` was executed successfully.
 
 ## 9. Known Limitations
-- The model heavily relies on immediate past lag (`lag_1`).
+- The project attempts the challenging task of predicting next-hour PM2.5 levels. While the model captures meaningful signal and improves significantly over a persistence baseline, it still struggles with sudden pollution spikes, which are difficult to predict from historical and meteorological features alone.
 - The project is for educational/portfolio use and is not an official health advisory system.
 
 ## 10. Final Manual Steps for Divyanshu
