@@ -1,0 +1,8 @@
+.venv
+venv
+__pycache__
+data/raw
+data/processed
+.git
+.ipynb_checkpoints
+.pytest_cache
